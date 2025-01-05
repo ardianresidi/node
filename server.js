@@ -257,6 +257,7 @@ function getLocationId(city) {
             throw new Error('City not found');
     }
 }
+const csvFilePath = path.resolve('/tmp/respiratory_data.csv'); // Use '/tmp' for temporary files
 
 console.log('Attempting to write data to CSV');
 console.log('File Path:', csvFilePath);
@@ -264,7 +265,7 @@ console.log('Data to write:', city);
 
 // CSV file setup
 //const csvFilePath = path.join(__dirname, 'respiratory_data.csv');
-const csvFilePath = path.resolve('/tmp/respiratory_data.csv'); // Use '/tmp' for temporary files
+
 
 // Function to check if the CSV file exists and add headers if needed
 function ensureCsvHeaders() {
