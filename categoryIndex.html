@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Insurance | HollandZorg</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        
+        /* Banner */
+        .banner {
+            background-color: #8c9fb2;
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .banner a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .banner a:hover {
+            color: #f4f7fb;
+        }
+
+        /* Image Section */
+        .image-section {
+            width: 100%;
+            height: 200px;
+            background-color: #f9b6b9;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .image-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Optional: adds a dark overlay */
+        }
+
+        .image-section .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #0078d4;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .col-12 {
+            width: 100%;
+        }
+
+        .col-md-4 {
+            width: 32%;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.75em;
+            color: #0078d4;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color:#8c9fb2;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-align: center;
+            display: inline-block;
+            margin-top: auto;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #005a8c;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .col-md-4 {
+                width: 48%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .col-md-4 {
+                width: 100%;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Banner Section -->
+    <div class="banner">
+        <a href="/employee">Employee</a>
+        <a> | </a>
+        <a href="/employer">Employer</a>
+        <a> | </a>
+        <a href="/about-us">About Us</a>
+        <a >&nbsp;</a>
+    </div>
+
+    <!-- Image Section -->
+    <div class="image-section">
+        <div class="overlay-text">A place where you can find all informations about Health Insurance!</div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <header>
+          <h2>
+            <p>Please select the categories given below!</p></h2>
+        </header>
+
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    
+                    <div class="card-title">I need health insurance</div>
+                    <div class="card-text">HollandZorg health insurance is made for international workers and expats, living or working in the Netherlands.</div>
+                    <a href="birth.html" class="btn">Health insurance for individuals</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-title">I need insurance for my family</div>
+                    <div class="card-text">HollandZorg offers family packages to provide coverage for your loved ones while staying in the Netherlands.</div>
+                    <a href="/family" class="btn">Health insurance for families</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-title">I need insurance for my family</div>
+                    <div class="card-text">HollandZorg offers family packages to provide coverage for your loved ones while staying in the Netherlands.</div>
+                    <a href="/family" class="btn">Health insurance for families</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-title">I need insurance for my family</div>
+                    <div class="card-text">HollandZorg offers family packages to provide coverage for your loved ones while staying in the Netherlands.</div>
+                    <a href="/family" class="btn">Health insurance for families</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-title">I need insurance for my family</div>
+                    <div class="card-text">HollandZorg offers family packages to provide coverage for your loved ones while staying in the Netherlands.</div>
+                    <a href="/family" class="btn">Health insurance for families</a>
+                </div>
+            </div>  
+
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-title">I need insurance for my employees</div>
+                    <div class="card-text">As an employer, you can provide HollandZorg insurance for your employees working in the Netherlands.</div>
+                    <a href="/employers" class="btn">Health insurance for employers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

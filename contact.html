@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Dashboard</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+        }
+
+        /* Left Menu Styles */
+        .left-menu {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #34495e;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #34495e;
+            border-left: 5px solid #1abc9c;
+        }
+
+        .menu-item:active {
+            background-color: #1abc9c;
+        }
+
+        /* Main Content Styles */
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .content h1 {
+            font-size: 2em;
+            color: #2c3e50;
+        }
+
+        .content p {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+       <!-- Left Menu -->
+       <div class="left-menu">
+        <div class="menu-title">Care +</div>
+        <a href="http://localhost:3000/" class="menu-item">HOME</a>
+        <a href="cardio.html" class="menu-item">Predict Cardiovascular Disease</a>
+        <a href="diabetes.html" class="menu-item">Predict Diabetes</a>
+        <a href="respiratory.html" class="menu-item">Predict Respiratory Disease</a>
+        <a href="#asthma" class="menu-item">Predict Asthma</a>
+        <a href="contact.html" class="menu-item">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Resolutions Macedonia</h1>
+        <p>Please contact info@resolutions.mk</p>
+
+       
+    </div>
+</body>
+</html>
