@@ -261,7 +261,7 @@ const csvFilePath = path.resolve('/tmp/respiratory_data.csv'); // Use '/tmp' for
 
 console.log('Attempting to write data to CSV');
 console.log('File Path:', csvFilePath);
-console.log('Data to write:', city);
+
 
 // CSV file setup
 //const csvFilePath = path.join(__dirname, 'respiratory_data.csv');
