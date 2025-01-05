@@ -211,7 +211,7 @@ app.get('/results', (req, res) => {
     <!-- Left Menu -->
     <div class="left-menu">
         <div class="menu-title">Care +</div>
-        <a href="/" class="menu-item">Home</a>
+        <a href="index.html" class="menu-item">Home</a>
         <a href="cardio.html" class="menu-item">Predict Cardiovascular Disease</a>
         <a href="diabetes.html" class="menu-item">Predict Diabetes</a>
         <a href="respiratory.html" class="menu-item">Predict Respiratory Disease</a>
