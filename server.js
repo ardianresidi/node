@@ -81,107 +81,157 @@ app.get('/results', (req, res) => {
     console.log(finalAdvice);
     
     
-    // Final Output
     const htmlContent = `
-        <html>
-          <head>
-        <style>
-            /* General Page Style */
-            body {
-                font-family: 'Arial', sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 0;
-                color: #333;
-                line-height: 1.6;
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Assessment</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            min-height: 100vh;
+        }
 
-            /* Title Styling */
-            h2 {
-                text-align: center;
-                color: #333;
-                font-size: 2rem;
-                margin: 20px 0;
-            }
+        /* Left Menu Styles */
+        .left-menu {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-            h3 {
-                text-align: center;
-                color: #555;
-                font-size: 1.5rem;
-            }
+        .menu-title {
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+            color: #1abc9c;
+        }
 
-            /* Table Styling */
-            table {
-                width: 80%;
-                margin: 30px auto;
-                border-collapse: collapse;
-                background-color: #fff;
-                border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
+        .menu-item {
+            padding: 15px 20px;
+            margin: 5px 0;
+            cursor: pointer;
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 1em;
+            transition: all 0.3s ease-in-out;
+            border-left: 5px solid transparent;
+        }
 
-            /* Table Header Styling */
-            th {
-                background-color: #4CAF50;
-                color: white;
-                padding: 12px 20px;
-                text-align: left;
-                font-size: 1.1rem;
-                text-transform: uppercase;
-            }
+        .menu-item:hover {
+            background-color: #34495e;
+            border-left: 5px solid #1abc9c;
+        }
 
-            /* Table Data Cell Styling */
-            td {
-                padding: 12px 20px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }
+        .menu-item:active {
+            background-color: #1abc9c;
+            color: #2c3e50;
+        }
 
-            /* Table Row Hover Effect */
-            tr:hover {
-                background-color: #f1f1f1;
-            }
+        /* Main Content Styles */
+        .content {
+            margin-left: 260px;
+            padding: 30px;
+            width:50%;
+            flex: 1;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+         
+        }
 
-            /* Table Border Styling */
-            table, th, td {
-                border: 1px solid #ddd;
-            }
+        .content h3 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
 
-            /* Risk Assessment Section */
-            p {
-                text-align: center;
-                font-size: 1.2rem;
-                margin-top: 20px;
-            }
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #7f8c8d;
+        }
 
-            .risk-level {
-                font-weight: bold;
-                font-size: 1.4rem;
-                color: #d9534f;
-            }
+        .content .risk-level {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e67e22; /* Orange for medium risk */
+        }
 
-            /* Responsive Design */
-            @media (max-width: 768px) {
-                table {
-                    width: 90%;
-                }
-                th, td {
-                    padding: 8px;
-                    font-size: 0.9rem;
-                }
-            }
-        </style>
-    </head>
-    <body>
+        .content .risk-level.high {
+            color: #e74c3c; /* Red for high risk */
+        }
+
+        .content .risk-level.low {
+            color: #27ae60; /* Green for low risk */
+        }
+
+        .content p:last-child {
+            margin-top: 20px;
+            border-top: 1px solid #dcdcdc;
+            padding-top: 15px;
+
+             /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #1abc9c;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #16a085;
+        }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Menu -->
+    <div class="left-menu">
+        <div class="menu-title">Care +</div>
+        <a href="/" class="menu-item">Home</a>
+        <a href="cardio.html" class="menu-item">Predict Cardiovascular Disease</a>
+        <a href="diabetes.html" class="menu-item">Predict Diabetes</a>
+        <a href="respiratory.html" class="menu-item">Predict Respiratory Disease</a>
        
-        <h3>Risk Assessment</h3>
-        <p>Risk Level: <span class="risk-level">${riskLevel}</span></p>
-        <p>${finalAdvice}</p>
-    </body>
-        </html>
-    `;
+        <a href="contact.html" class="menu-item">Contact</a>
+    </div>
 
-    res.send(htmlContent);
+    <!-- Main Content -->
+    <div class="content">
+        <h3>Risk Assessment</h3>
+        <p>Risk Level: <span class="risk-level ${riskLevel.toLowerCase()}">${riskLevel}</span></p>
+        <p>${finalAdvice}</p>
+        <button class="back-button" onclick="history.back()">Back</button>
+    </div>
+</body>
+</html>
+`;
+
+res.send(htmlContent);
+
 });
 
 // Function to get the location ID based on the city
