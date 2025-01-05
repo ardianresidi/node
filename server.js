@@ -263,6 +263,14 @@ console.log('Attempting to write data to CSV');
 console.log('File Path:', csvFilePath);
 
 
+// Check for read and write permissions
+fs.access(csvFilePath, fs.constants.F_OK | fs.constants.W_OK | fs.constants.R_OK, (err) => {
+    if (err) {
+        console.error(`No permissions for the file ${csvFilePath}:`, err);
+    } else {
+        console.log(`The file ${csvFilePath} has the necessary permissions (read/write).`);
+    }
+    
 // CSV file setup
 //const csvFilePath = path.join(__dirname, 'respiratory_data.csv');
 
