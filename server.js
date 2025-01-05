@@ -259,7 +259,8 @@ function getLocationId(city) {
 }
 
 // CSV file setup
-const csvFilePath = path.join(__dirname, 'respiratory_data.csv');
+//const csvFilePath = path.join(__dirname, 'respiratory_data.csv');
+const csvFilePath = path.resolve('/tmp/respiratory_data.csv'); // Use '/tmp' for temporary files
 
 // Function to check if the CSV file exists and add headers if needed
 function ensureCsvHeaders() {
@@ -289,6 +290,8 @@ app.post('/sufev1_fvc_ratiot', async (req, res) => {
 
         const locationId = getLocationId(city); 
         const apiUrl = `https://api.openaq.org/v2/locations/${locationId}?limit=1000`;
+        const apiKey = process.env.OPENAQ_API_KEY;
+
         const apiHeaders = {
             "x-api-key": "b77f00d01a26e10d71d1a8ba139c4df451e644ebca42d0519592b9b7eadfaee2"
         };
@@ -303,8 +306,13 @@ app.post('/sufev1_fvc_ratiot', async (req, res) => {
         const o3 = results.find(p => p.parameter === "o3")?.average?.toFixed(2) || "N/A";
 
         const csvData = `${age},${gender},${smokingStatus},${city},${pefr},${fev1},${fvc},${fev1_fvc_ratio},${cough},${wheezing},${shortness_of_breath},${chest_pain},${past_infections},${family_history},${air_quality},${pm10},${no2},${so2},${pm25},${o3}\n`;
-        fs.appendFileSync(csvFilePath, csvData);
+       // fs.appendFileSync(csvFilePath, csvData);
 
+       fs.appendFileSync(csvFilePath, csvData, (err) => {
+        if (err) console.error('File write error:', err);
+    });
+
+    
         res.redirect(`/results?data=${encodeURIComponent(JSON.stringify(req.body))}`);
     } catch (error) {
         console.error(error);
