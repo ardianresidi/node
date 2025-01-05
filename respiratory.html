@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+        }
+
+        /* Left Menu Styles */
+        .left-menu {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #34495e;
+            padding-bottom: 10px;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #34495e;
+            border-left: 5px solid #1abc9c;
+        }
+
+        .menu-item:active {
+            background-color: #1abc9c;
+        }
+
+        /* Main Content Styles */
+        .content {
+            margin-left: 260px;
+            padding: 30px;
+            width: 50%;
+        }
+
+        .content h1 {
+            font-size: 3em;
+            color: #2c3e50;
+        }
+
+        .content p {
+            font-size: 2em;
+            color: #7f8c8d;
+        }
+        
+        /* Visualization Section Styles */
+        .visualizations {
+            margin-left: 20px;
+            padding: 30px;
+            width: 25%;
+            background-color: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group, .form-group-radio {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            width: 20%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+      <!-- Left Menu -->
+      <div class="left-menu">
+        <div class="menu-title">Care +</div>
+        <a href="http://localhost:3000/" class="menu-item">HOME</a>
+        <a href="cardio.html" class="menu-item">Predict Cardiovascular Disease</a>
+        <a href="diabetes.html" class="menu-item">Predict Diabetes</a>
+        <a href="respiratory.html" class="menu-item">Predict Respiratory Disease</a>
+        <a href="#asthma" class="menu-item">Predict Asthma</a>
+        <a href="contact.html" class="menu-item">Contact</a>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Respiratory Disease Detection Form</h1>
+        <p>Please fill the following form!</p>
+
+        <form id="respiratory-form" action="http://localhost:3000/sufev1_fvc_ratiot" method="POST">
+            <!-- Demographic Information -->
+            <label for="city">City: </label>
+            <select id="city" name="city" required>
+                <option value="Tetovo">Tetovo</option>
+                <option value="Prilep">Prilep</option>
+                <option value="Kumanovo">Kumanovo</option>
+                <option value="Gazi Baba">Gazi Baba</option>
+                <option value="Lisice">Lisice</option>
+                <option value="Karpos">Karpos</option>
+                <option value="Gevgelija">Gevgelija</option>
+                <option value="Gostivar">Gostivar</option>
+            </select><br><br>
+      
+      
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="smokingStatus">Smoking Status</label>
+            <select id="smokingStatus" name="smokingStatus" required>
+                <option value="">Select Smoking Status</option>
+                <option value="Smoker">Smoker</option>
+                <option value="Non-Smoker">Non-Smoker</option>
+                <option value="Ex-Smoker">Ex-Smoker</option>
+            </select>
+        </div>
+        <!-- Pulmonary Function -->
+        <h3>Pulmonary Function</h3>
+        <div class="form-group">
+            <label>PEFR</label>
+            <input type="number" id="pefr" name="pefr" required>
+        </div>
+        <div class="form-group">
+            <label>FEV1</label>
+            <input type="number" id="fev1" name="fev1" required>
+        </div>
+        <div class="form-group">
+            <label>FVC</label>
+            <input type="number" id="fvc" name="fvc" required>
+        </div>
+        <div class="form-group">
+            <label>FEV1/FVC Ratio</label>
+            <input type="number" id="fev1_fvc_ratio" name="fev1_fvc_ratio" step="0.01" required>
+        </div>
+        <!-- Clinical Symptoms -->
+        <h3>Clinical Symptoms</h3>
+        <div class="form-group">
+            <label>Cough</label>
+            <div class="form-group-radio">
+                <input type="radio" name="cough" value="No Cough" required> No Cough<br>
+                <input type="radio" name="cough" value="Dry Cough" required> Dry Cough<br>
+                <input type="radio" name="cough" value="Productive Cough" required> Productive Cough<br>
+                <input type="radio" name="cough" value="Chronic Cough" required> Chronic Cough<br>
+                <input type="radio" name="cough" value="Occasional Cough" required> Occasional Cough
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Wheezing</label>
+            <input type="radio" name="wheezing" value="Yes" required> Yes
+            <input type="radio" name="wheezing" value="No" required> No
+        </div>
+        <div class="form-group">
+            <label>Shortness of Breath</label>
+            <input type="radio" name="shortness_of_breath" value="Yes" required> Yes
+            <input type="radio" name="shortness_of_breath" value="No" required> No
+        </div>
+        <div class="form-group">
+            <label>Chest Pain</label>
+            <input type="radio" name="chest_pain" value="Yes" required> Yes
+            <input type="radio" name="chest_pain" value="No" required> No
+        </div>
+        <!-- Medical History -->
+        <h3>Medical History</h3>
+        <div class="form-group">
+            <label>Past Respiratory Infections</label>
+            <select id="past_infections" name="past_infections" required>
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Family History</label>
+            <select id="family_history" name="family_history" required>
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <!-- Environmental and Lifestyle Factors -->
+        <h3>Environmental and Lifestyle Factors</h3>
+        <div class="form-group">
+            <label>Air Quality and Pollution (1-10)</label>
+            <input type="number" id="air_quality" name="air_quality" min="1" max="10" required>
+        </div>
+        <div class="form-group">
+            <label>Living Conditions</label>
+            <select id="living_conditions" name="living_conditions" required>
+                <option value="">Select</option>
+                <option value="Mold">Mold</option>
+                <option value="Dust">Dust</option>
+                <option value="Allergens">Allergens</option>
+                <option value="Clean">Clean</option>
+                <option value="Others">Others</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Physical Activity</label>
+            <select id="physical_activity" name="physical_activity" required>
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+            <br>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Submit" class="submit-btn">
+        </form>
+    </div>
+
+    <!-- Right Visualizations Section -->
+    <div class="visualizations">
+        <h2>City Data Chart</h2>
+        <canvas id="myChart"></canvas>
+        
+        <script src="https://cdn.jsdelivr.net/npm/papaparse/papaparse.min.js"></script>
+        <script>
+            // Fetching the CSV file
+            fetch('respiratory_data.csv')
+                .then(response => response.text())
+                .then(data => {
+                    // Parsing the CSV data
+                    const parsedData = Papa.parse(data, {header: true});
+                    const cityData = {};
+        
+                    // Counting the occurrences of each city
+                    parsedData.data.forEach(row => {
+                        const city = row.City;
+                        if (city) {
+                            cityData[city] = (cityData[city] || 0) + 1;
+                        }
+                    });
+        
+                    // Preparing data for the chart
+                    const chartLabels = Object.keys(cityData);
+                    const chartData = Object.values(cityData);
+        
+                    // Chart.js code to render the pie chart
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: chartLabels,
+                            datasets: [{
+                                label: 'City Data',
+                                data: chartData,
+                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(tooltipItem) {
+                                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+        </script>
+
+        <BR>
+            
+            <h2>Gender Data Chart</h2>
+            <canvas id="myChart2"></canvas>
+            
+            <script src="https://cdn.jsdelivr.net/npm/papaparse/papaparse.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Fetching the CSV file
+                fetch('respiratory_data.csv')
+                    .then(response => response.text())
+                    .then(data => {
+                        // Parsing the CSV data
+                        const parsedData = Papa.parse(data, { header: true });
+                        const genderData = {};
+            
+                        // Counting the occurrences of each gender
+                        parsedData.data.forEach(row => {
+                            const gender = row.Gender?.trim();
+                            if (gender) {
+                                genderData[gender] = (genderData[gender] || 0) + 1;
+                            }
+                        });
+            
+                        // Preparing data for the chart
+                        const chartLabels = Object.keys(genderData);
+                        const chartData = Object.values(genderData);
+            
+                        // Chart.js code to render the pie chart
+                        const ctx = document.getElementById('myChart2').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: chartLabels,
+                                datasets: [{
+                                    label: 'Gender Data',
+                                    data: chartData,
+                                    backgroundColor: ['#FF6384', '#36A2EB'],
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(tooltipItem) {
+                                                return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+            </script>
+<BR>
+    <h2>PEFR > 100 by Gender</h2>
+<canvas id="myChart3"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Fetching the CSV file
+    fetch('respiratory_data.csv')
+        .then(response => response.text())
+        .then(data => {
+            // Parsing the CSV data
+            const parsedData = Papa.parse(data, { header: true });
+            const genderData = { Male: 0, Female: 0 };
+
+            // Counting occurrences of PEFR > 10 for each gender
+            parsedData.data.forEach(row => {
+                const gender = row.Gender?.trim();
+                const perf = parseFloat(row.perf);
+
+                if (gender && !isNaN(perf) && perf > 100) {
+                    if (genderData[gender] !== undefined) {
+                        genderData[gender] += 1;
+                    }
+                }
+            });
+
+            // Preparing data for the chart
+            const chartLabels = Object.keys(genderData);
+            const chartData = Object.values(genderData);
+
+            // Chart.js code to render the pie chart
+            const ctx = document.getElementById('myChart3').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: 'PEFR > 100 by Gender',
+                        data: chartData,
+                        backgroundColor: ['#FF6384', '#36A2EB'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+</script>
+            
+   <BR>
+    
+    <h2>PEFR, FEV1, FVC, FEV1/FVC Ratio by Gender</h2>
+<canvas id="myChart4"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Fetching the CSV file
+    fetch('respiratory_data.csv')
+        .then(response => response.text())
+        .then(data => {
+            // Parsing the CSV data
+            const parsedData = Papa.parse(data, { header: true });
+            const metrics = ['perf', 'fev1', 'fvc', 'fev1_fvc_ratio'];
+            const genderMetricsData = {
+                Male: { perf: 0, fev1: 0, fvc: 0, 'fev1_fvc_ratio': 0 },
+                Female: { perf: 0, fev1: 0, fvc: 0, 'fev1_fvc_ratio': 0 }
+            };
+
+            // Counting occurrences for each metric with values > 10 by gender
+            parsedData.data.forEach(row => {
+                const gender = row.Gender?.trim();
+                if (gender && genderMetricsData[gender]) {
+                    metrics.forEach(metric => {
+                        const value = parseFloat(row[metric]);
+                        if (!isNaN(value) && value > 10) {
+                            genderMetricsData[gender][metric] += 1;
+                        }
+                    });
+                }
+            });
+
+            // Preparing data for the chart
+            const chartLabels = metrics;
+            const maleData = metrics.map(metric => genderMetricsData.Male[metric]);
+            const femaleData = metrics.map(metric => genderMetricsData.Female[metric]);
+
+            // Chart.js code to render the bar chart
+            const ctx = document.getElementById('myChart4').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [
+                        {
+                            label: 'Male',
+                            data: maleData,
+                            backgroundColor: '#36A2EB'
+                        },
+                        {
+                            label: 'Female',
+                            data: femaleData,
+                            backgroundColor: '#FF6384'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+
+</body>
+</html>
