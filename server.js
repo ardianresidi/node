@@ -80,7 +80,7 @@ app.get('/results', (req, res) => {
     // Print only the final advice
     console.log(finalAdvice);
     
-
+    
     // Final Output
     const htmlContent = `
         <html>
@@ -173,47 +173,7 @@ app.get('/results', (req, res) => {
         </style>
     </head>
     <body>
-        <h2>Your Submitted Data</h2>
-        <table>
-            <tr>
-                <th>City</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Smoking Status</th>
-                <th>PEFR</th>
-                <th>FEV1</th>
-                <th>FVC</th>
-                <th>FEV1/FVC Ratio</th>
-                <th>Cough</th>
-                <th>Wheezing</th>
-                <th>Shortness of Breath</th>
-                <th>Chest Pain</th>
-                <th>Past Infections</th>
-                <th>Family History</th>
-                <th>Air Quality</th>
-                <th>Living Conditions</th>
-                <th>Physical Activity</th>
-            </tr>
-            <tr>
-                <td>${data.city}</td>
-                <td>${data.age}</td>
-                <td>${data.gender}</td>
-                <td>${data.smokingStatus}</td>
-                <td>${data.pefr}</td>
-                <td>${data.fev1}</td>
-                <td>${data.fvc}</td>
-                <td>${data.fev1_fvc_ratio}</td>
-                <td>${data.cough}</td>
-                <td>${data.wheezing}</td>
-                <td>${data.shortness_of_breath}</td>
-                <td>${data.chest_pain}</td>
-                <td>${data.past_infections}</td>
-                <td>${data.family_history}</td>
-                <td>${data.air_quality}</td>
-                <td>${data.living_conditions}</td>
-                <td>${data.physical_activity}</td>
-            </tr>
-        </table>
+       
         <h3>Risk Assessment</h3>
         <p>Risk Level: <span class="risk-level">${riskLevel}</span></p>
         <p>${finalAdvice}</p>
