@@ -258,6 +258,10 @@ function getLocationId(city) {
     }
 }
 
+console.log('Attempting to write data to CSV');
+console.log('File Path:', csvFilePath);
+console.log('Data to write:', city);
+
 // CSV file setup
 //const csvFilePath = path.join(__dirname, 'respiratory_data.csv');
 const csvFilePath = path.resolve('/tmp/respiratory_data.csv'); // Use '/tmp' for temporary files
@@ -308,6 +312,7 @@ app.post('/sufev1_fvc_ratiot', async (req, res) => {
         const csvData = `${age},${gender},${smokingStatus},${city},${pefr},${fev1},${fvc},${fev1_fvc_ratio},${cough},${wheezing},${shortness_of_breath},${chest_pain},${past_infections},${family_history},${air_quality},${pm10},${no2},${so2},${pm25},${o3}\n`;
        // fs.appendFileSync(csvFilePath, csvData);
 
+       
        fs.appendFileSync(csvFilePath, csvData, (err) => {
         if (err) console.error('File write error:', err);
     });
